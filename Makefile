@@ -1,14 +1,14 @@
 NAME = philo
 
 # Source files
-SRCS = src/main.c src/utils.c src/init.c src/routine.c src/cleanup.c
+SRCS = src/main.c src/utils.c src/init.c src/routine.c src/cleanup.c src/validation.c src/monitor.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=address -g3
 RM = rm -f
 
 # Libft

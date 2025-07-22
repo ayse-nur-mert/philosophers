@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amert <amert@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/22 11:38:24 by amert             #+#    #+#             */
+/*   Updated: 2025/07/22 11:39:06 by amert            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -7,7 +19,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <string.h>
-# include "../lib/libft/libft.h"
+# include "libft/libft.h"
 
 /* Action types for logging */
 # define FORK_TAKEN 1
@@ -46,10 +58,15 @@ typedef struct s_data
 
 /* Main functions */
 int		main(int argc, char **argv);
+int		handle_initialization_error(t_data *data, char *error_msg,
+			int cleanup_needed);
+
+/* Validation functions */
 int		validate_arguments(int argc, char **argv);
 int		check_numeric_args(char **argv);
 int		check_argument_values(char **argv);
 int		check_optional_arg(char **argv);
+int		is_valid_digit_string(char *str);
 
 /* Init functions */
 int		init_data(t_data *data, char **argv);
@@ -60,7 +77,11 @@ int		validate_args(int argc, char **argv);
 /* Routine functions */
 void	*philo_routine(void *philosopher);
 int		philo_eat(t_philo *philo);
+int		check_eating_conditions(t_philo *philo);
+int		take_forks_and_eat(t_philo *philo);
 void	*monitor_routine(void *arg);
+
+/* Monitor functions */
 int		check_philo_death(t_data *data, int i);
 int		check_all_ate(t_data *data);
 
